@@ -76,10 +76,8 @@ class Midi2Mp3 {
      */
     private function getConvertResponse($success, $message) {
         return array(
-            'status' => array(
-                'code' => $success ? 'OK' : 'ERROR',
-                'message' => $message
-            ),
+            'statusCode' => $success ? 'OK' : 'ERROR',
+            'message' => $message,
             'base64Mp3Data' => $this->getResultFile(),
             'logs' => $this->getLogFiles()
         );

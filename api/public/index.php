@@ -26,7 +26,6 @@ $app->get('/info', function ($request, $response, $args) {
 
 });
 
-
 // ------------------------
 // ROUTE CONVERT
 // ------------------------
