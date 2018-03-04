@@ -1,0 +1,10 @@
+version: '2'
+
+services:
+    web:
+        image: midi2mp3:latest
+        ports:
+            - "80:80"
+        environment:
+            - DOCUMENT_ROOT=public
+            - UID=33
