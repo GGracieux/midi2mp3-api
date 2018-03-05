@@ -1,7 +1,7 @@
 # midi2mp3-api
-API REST conteneurisée (Docker, PHP, Slim, FluidSynth, Lame) pour convertion de fichier MIDI en MP3
+Containerized REST API (Docker, PHP, Slim, FluidSynth, Lame) for MIDI to MP3 convertion.
 
-## Mise en route
+## Start
 
 #### Installation
 ```bash
@@ -18,18 +18,18 @@ docker image build -t midi2mp3 .
 ```bash
 docker-compose up
 ```
-Le serveur apache est exposé sur le port 80 avec deux EndPoint : 
+Apache server is listening on port 80 with two endpoints : 
 - http://[docker-machine]/info 
 - http://[docker-machine]/convert
 
 
-## Utilisation
+## API Usage
 
-### API Endpoint /info
+### Endpoint /info
 
 #### Request
-- Methode : GET
-- Pas de paramètres
+- Verb : GET
+- No parameter
 	
 #### Response
 - Content-Type : Application/json
@@ -37,18 +37,18 @@ Le serveur apache est exposé sur le port 80 avec deux EndPoint :
 {
   "apiName": "midi2mp3",
   "version": "1",
-  "description": "Convertion de fichier midi en mp3"
+  "description": "Midi to MP3 Convertion"
 }
 ```  
 	
-### API Endpoint /convert
+### Endpoint /convert
 	
 #### Request	
-- Methode : POST
+- Verb : POST
 - Content-Type : Application/json
-- Parametres :
--- midiData : Midi encodé en base64
--- soundfont : Police sonore a utiliser
+- Parameters :
+-- midiData : Base64 encoded Midi file
+-- soundfont : Sound font name to use to convert midi file
 ```json
 {
   "midiData": "TVRoZAAAAAYAAQACAYBNVHJrAAAAUwD/Aw1jb250cm.....AP8BC",
@@ -61,16 +61,16 @@ Le serveur apache est exposé sur le port 80 avec deux EndPoint :
 ```json  
 {
   "statusCode": "OK|ERROR",
-  "message": "Complement d'information en cas d'erreur",
+  "message": "Information complement on error",
   "base64Mp3Data": "oAsAdkAJA8WoMAkDwAAJA+WoMAkD4AAJBAWoMAkEAAAJB....vAA==",
   "logs": [
     {
-      "title": "FluidSynth : Convertion midi -> wav",
-      "content": "Detail des logs FluidSynth"
+      "title": "FluidSynth : midi -> wav convertion",
+      "content": "FluidSynth log details"
     },
     {
-      "title": "Lame : Convertion wav -> mp3",
-      "content": "Detail des logs Lame"
+      "title": "Lame : wav -> mp3 convertion",
+      "content": "Lame log details"
     }
   ]
 }
