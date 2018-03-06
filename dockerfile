@@ -1,8 +1,12 @@
+FROM teuki/midi2mp3
+#
+# teuki/midi2mp3 dockerfile
+#
 # Image source
-FROM 1and1internet/ubuntu-16-apache-php-7.0
-
+# FROM 1and1internet/ubuntu-16-apache-php-7.0
+#
 # Installation de fluidsynth (midi -> wav) et lame (wav -> mp3)
-RUN apt-get update && apt-get install -y fluidsynth lame
+# RUN apt-get update && apt-get install -y fluidsynth lame
 
 # Info image
 MAINTAINER ggracieux@gmail.com
