@@ -1,5 +1,5 @@
 # midi2mp3-api
-Containerized REST API (Docker, PHP, Slim, FluidSynth, Lame) for MIDI to MP3 convertion.
+REST API (Docker, PHP, Slim, FluidSynth, Lame) for MIDI to MP3 convertion.
 
 ## Start
 
