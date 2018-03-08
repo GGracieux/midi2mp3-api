@@ -48,11 +48,9 @@ Apache server is listening on port 80 with two endpoints :
 - Content-Type : Application/json
 - Parameters :
 -- midiData : Base64 encoded Midi file
--- soundfont : Sound font name to use to convert midi file
 ```json
 {
-  "midiData": "TVRoZAAAAAYAAQACAYBNVHJrAAAAUwD/Aw1jb250cm.....AP8BC",
-  "soundfont": "bagpipes"
+  "midiData": "TVRoZAAAAAYAAQACAYBNVHJrAAAAUwD/Aw1jb250cm.....AP8BC"
 }
 ```
 	
