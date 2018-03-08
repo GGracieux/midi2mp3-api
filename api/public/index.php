@@ -33,11 +33,10 @@ $app->post('/convert', function ($request, $response, $args) {
 
     // Recup cnbData via la request
     $midiData = $request->getParsedBody()['base64MidiData'];
-    $soundfont = $request->getParsedBody()['soundfont'];
 
     // Convertion
     $lp = new Midi2Mp3();
-    $result = $lp->convert($midiData,$soundfont);
+    $result = $lp->convert($midiData);
 
     // retour resultat
     return $response->withJson($result,200);

@@ -4,6 +4,7 @@ class Midi2Mp3 {
 
     // dossier temporaire pour le traitement lilypond
     const TMP_DIR = '/tmp/midi2mp3';
+	const SOUNDFONT = dirname(__DIR__) . '/soundfonts/TimGM6mb.sf2';
 
     // Id de session unique
     private $id;
@@ -25,7 +26,7 @@ class Midi2Mp3 {
     // CONVERTION
     //-----------------------------------------
 
-    public function convert($midiData, $soundfont) {
+    public function convert($midiData) {
 
         try {
 
@@ -35,8 +36,7 @@ class Midi2Mp3 {
             file_put_contents($this->inputFile,base64_decode($midiData));
 
             // Execution FluidSynth
-            $soundfontDir = dirname(__DIR__) . '/soundfonts';
-            $cmd  = "fluidsynth -F $this->dir/$this->id.wav $soundfontDir/$soundfont.sf2 $this->dir/$this->id.midi > $this->logFileFS 2>&1";
+            $cmd  = "fluidsynth -F $this->dir/$this->id.wav " . self::SOUNDFONT . " $this->dir/$this->id.midi > $this->logFileFS 2>&1";
             exec($cmd,$op,$retVal);
             if ($retVal!=0) throw new Exception("Erreur lors de l'execution fluidSynth");
 
