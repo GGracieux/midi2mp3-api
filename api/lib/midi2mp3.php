@@ -39,12 +39,12 @@ class Midi2Mp3 {
 			$soundfont = dirname(__DIR__) . '/soundfonts/' . self::SOUNDFONT;
             $cmd  = "fluidsynth -F $this->dir/$this->id.wav $soundfont $this->dir/$this->id.midi > $this->logFileFS 2>&1";
             exec($cmd,$op,$retVal);
-            if ($retVal!=0) throw new Exception("Erreur lors de l'execution fluidSynth");
+            if ($retVal!=0) throw new Exception("Error while running fluidSynth");
 
             // Execution Lame
             $cmd  = "lame $this->dir/$this->id.wav > $this->logFileLame 2>&1";
             exec($cmd,$op,$retVal);
-            if ($retVal!=0) throw new Exception("Erreur lors de l'execution lame");
+            if ($retVal!=0) throw new Exception("Error while running lame");
 
             // Compose le retour OK
             $result = $this->getConvertResponse(true,'');
@@ -105,13 +105,13 @@ class Midi2Mp3 {
         $logs = array();
         if (is_file($this->logFileFS)) {
             $logs[] = array(
-                'title' => 'FluidSynth : Convertion midi -> wav',
+                'title' => 'FluidSynth : MIDI to WAV convertion',
                 'content' => file_get_contents($this->logFileFS)
             );
         }
         if (is_file($this->logFileLame)) {
             $logs[] = array(
-                'title' => 'Lame : Convertion wav -> mp3',
+                'title' => 'Lame : WAV to MP3 convertion',
                 'content' => file_get_contents($this->logFileLame)
             );
         }

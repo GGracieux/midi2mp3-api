@@ -18,7 +18,7 @@ $app->get('/info', function ($request, $response, $args) {
 	$infos = array(
 		'apiName' => 'midi2mp3',
 		'version'=>'1',
-		'description' => 'Convertion de fichier midi en mp3',
+		'description' => 'Midi to Mp3 file convertion',
 	);
 
 	// retourne le message
