@@ -21,7 +21,25 @@ class Midi2Mp3 {
     // Chemin complet du fichier de log Lame
     private $logFileLame;
 
+	
+    //-----------------------------------------
+    // INFO
+    //-----------------------------------------	
+	
+	public function info() {
+		// Compose le message retour
+		return array(
+			'apiName' => 'midi2mp3',
+			'version' => array(
+				'api' => '1.1',
+				'fluildsynth' => FLUIDSYNTH_VERSION,
+				'lame' => LAME_VERSION
+			),
+			'description' => 'Midi to Mp3 file convertion',
+		);		
+	}
 
+	
     //-----------------------------------------
     // CONVERTION
     //-----------------------------------------

@@ -1,44 +1,44 @@
 <?php 
 
-// Définition APP_ROOT et autoloader
+// Define APP_ROOT and autoloader
 define('APP_ROOT',dirname(__DIR__));
 require APP_ROOT . '/vendor/autoload.php';
 require APP_ROOT . '/lib/midi2mp3.php';
 
-// Instanciation de l'application
+// Includes env defined constant (generated through docker image)
+@require_once APP_ROOT . '/lib/const.php';
+
+// Creates app
 $app = new \Slim\App();
 
 
 // ------------------------
-// ROUTE INFO
+// INFO ROUTE
 // ------------------------
 $app->get('/info', function ($request, $response, $args) {
 
-    // Compose le message retour
-	$infos = array(
-		'apiName' => 'midi2mp3',
-		'version'=>'1',
-		'description' => 'Midi to Mp3 file convertion',
-	);
+    // gets API Information
+    $lp = new Midi2Mp3();
+    $result = $lp->info();
 
-	// retourne le message
-    return $response->withJson($infos,200);
+	// returns json response
+    return $response->withJson($result,200);
 
 });
 
 // ------------------------
-// ROUTE CONVERT
+// CONVERT ROUTE
 // ------------------------
 $app->post('/convert', function ($request, $response, $args) {
 
-    // Recup cnbData via la request
+    // Gets midiData in request
     $midiData = $request->getParsedBody()['base64MidiData'];
 
     // Convertion
     $lp = new Midi2Mp3();
     $result = $lp->convert($midiData);
 
-    // retour resultat
+    // retrun results
     return $response->withJson($result,200);
 
 });
