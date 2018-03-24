@@ -46,6 +46,10 @@ class Midi2Mp3 {
 
     public function convert($midiData) {
 
+        // Mode optimiste
+        $success = true;
+        $message = '';
+
         try {
 
             // Initialisation
@@ -64,16 +68,23 @@ class Midi2Mp3 {
             exec($cmd,$op,$retVal);
             if ($retVal!=0) throw new Exception("Error while running lame");
 
-            // Compose le retour OK
-            $result = $this->getConvertResponse(true,'');
-
         } catch (Exception $ex) {
 
             // Compose le retour ERREUR
-            $result = $this->getConvertResponse(false, $ex->getMessage());
+            $success = false;
+            $message = $ex->getMessage();
+
         }
 
+        // Compose la réponse
+        $result = $this->getConvertResponse($success,$message);
+
+        // Efface les données de session
+        $this->deleteSessionData();
+
+        // Retourne le résultat
         return $result;
+
     }
 
     /**
@@ -134,6 +145,14 @@ class Midi2Mp3 {
             );
         }
         return $logs;
+    }
+
+    /**
+    * Efface les données de session
+    */
+    private function deleteSessionData() {
+        $cmd = "rm -rf " . $this->dir;
+        exec($cmd,$op,$retVal);
     }
 
 }
