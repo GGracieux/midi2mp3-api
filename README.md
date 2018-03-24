@@ -11,7 +11,7 @@ composer install
 	
 #### Build
 ```bash
-docker image build -t midi2mp3 .
+docker image build -t midi2mp3-api .
 ```
 
 #### Run
