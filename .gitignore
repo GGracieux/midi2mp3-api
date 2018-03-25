@@ -1,3 +1,2 @@
-api/vendor/
-api/composer.lock
+vendor/
 .idea

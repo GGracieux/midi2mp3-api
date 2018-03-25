@@ -1,22 +1,21 @@
-FROM teuki/midi2mp3
-#
-# teuki/midi2mp3 dockerfile
-#
-# Image source
-# FROM 1and1internet/ubuntu-16-apache-php-7.0
-#
-# Installation de fluidsynth (midi -> wav) et lame (wav -> mp3)
-# RUN apt-get update && apt-get install -y fluidsynth lame
+# Source image
+FROM 1and1internet/ubuntu-16-apache-php-7.0
 
-# Info image
+# Fluidsynth (midi -> wav) et lame (wav -> mp3) installation
+RUN apt-get update && apt-get install -y fluidsynth lame
+
+# Maintainer info
 MAINTAINER ggracieux@gmail.com
 
-# Ajout de la conf apache 
-COPY apache/apache.conf /etc/apache2/sites-available/000-default.conf
+# Apache configuration
+COPY apache.conf /etc/apache2/sites-available/000-default.conf
 RUN chmod 777 /etc/apache2/sites-available/000-default.conf
 
-# Ajout de l'api
-COPY api /var/www
+# Adds API source files
+COPY lib /var/www/lib
+COPY public /var/www/public
+COPY soundfonts /var/www/soundfonts
+COPY vendor /var/www/vendor
 RUN chown -R www-data /var/www
 RUN chmod -R 777 /var/www
 
@@ -24,7 +23,7 @@ RUN chmod -R 777 /var/www
 ENV DOCUMENT_ROOT public
 ENV UID 33
 
-# PHP env variables
+# API's PHP env variables
 RUN echo "<?php define('FLUIDSYNTH_VERSION',\"$(fluidsynth -h | sed -n 1p)\"); " > /var/www/lib/const.php
 RUN echo "define('LAME_VERSION',\"$(lame -? | sed -n 1p)\"); ?>" >> /var/www/lib/const.php
 RUN chmod 777 /var/www/lib/const.php

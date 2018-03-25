@@ -1,11 +1,14 @@
 # midi2mp3-api
 REST API (Docker, PHP, Slim, FluidSynth, Lame) for MIDI to MP3 convertion.
 
+## Prerequisite
+- Install [composer](https://getcomposer.org/) 
+- Install [docker](https://www.docker.com/)
+
 ## Start
 
 #### Installation
 ```bash
-cd api
 composer install
 ```
 	
@@ -16,16 +19,12 @@ docker image build -t midi2mp3-api .
 
 #### Run
 ```bash
-docker-compose up
+docker run -p 80:80 midi2mp3-api
 ```
-Apache server is listening on port 80 with two endpoints : 
-- http://[docker-machine]/info 
-- http://[docker-machine]/convert
-
 
 ## API Usage
 
-### Endpoint /info
+### Endpoint http://[docker-machine]/info
 
 #### Request
 - Verb : GET
@@ -41,7 +40,7 @@ Apache server is listening on port 80 with two endpoints :
 }
 ```  
 	
-### Endpoint /convert
+### Endpoint http://[docker-machine]/convert
 	
 #### Request	
 - Verb : POST
